@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+<div class="container-sm creatememberbody">
+    <form action="/createmember" , method="post">
+        <div class="form-group">
+            <label for="membername"><h2 style="color: white; font-weight: bold;">Name</h2></label>
+            <input class="form-control" id="membername" name="membername" required>
+        </div>
+
+        <div class="form-group">
+            <label for="memberemail"><h2 style="color: white; font-weight: bold;">Email</h2></label>
+            <input type="email" class="form-control" id="memberemail" name="memberemail" required>
+        </div>
+
+        <button type="submit" class="btn btn-success" style="font-size: 1.5rem; font-weight: bold;">Create</button>
+    </form>
+</div>
+{% endblock %}

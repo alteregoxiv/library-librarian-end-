@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+                
+        <title>
+            {% block title %}
+                Library
+            {% endblock %}
+        </title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="/static/css/base.css">
+        <link rel="shortcut icon" href="/static/images/books.png">
+    </head>
+    <body>
+        {% block navbar %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="/">
+                    <h3 style="font-weight: bold; color: #28a745;">
+                        <img src="/static/images/books.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                        Library
+                    </h3>
+                </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+                
+                {% if session['email'] %}
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/librarianinfo" style="font-weight: bold;">{{ session['name'] }}<span class="sr-only">(current)</span></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">LogOut</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signout">SignOut</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/library">Library</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/filterlibrary">FilterLibrary</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/alltransactions">Transactions</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/membersinfo">Members</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/createmember">CreateMembers</a>
+                            </li>
+                        </ul>
+                {% else %}
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/login">LogIn<span class="sr-only">(current)</span></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signin">SignIn</a>
+                            </li>
+                        </ul>
+                {% endif %}
+                        <form action="/new_books" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="title" name="title">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                        <a class="btn btn-success my-2 my-sm-0" href="/filtersearch">Filter</a>
+                    </div>
+
+            </nav>
+        {% endblock %}
+
+        {% block flashbody %}
+            <div class="container-sm flashes">
+                {% for category,msg in get_flashed_messages(with_categories=True) %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        <strong>{{ msg }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endblock %}
+
+        {% block mainbody %}
+        {% endblock %}
+    </body>
+</html> 

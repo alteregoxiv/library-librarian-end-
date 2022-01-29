@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+<div class="container-sm signinbody">
+    <form action="/signin" method="post">
+        <div class="form-group">
+            <label for="signinusername"><h2 style="color: white; font-weight: bold;">Username</h2></label>
+            <input class="form-control" id="signinusername" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="signinemail"><h2 style="color: white; font-weight: bold;">Email address</h2></label>
+            <input type="email" class="form-control" id="signinemail" name="email" placeholder="abc@xyz.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="signinpwd"><h2 style="color: white; font-weight: bold;">Password</h2></label>
+            <input type="password" class="form-control" id="signinpwd" , name="signinpwd" required>
+        </div>
+
+        <div class="form-group">
+            <label for="signinconpwd"><h2 style="color: white; font-weight: bold;">Confirm Password</h2></label>
+            <input type="password" class="form-control" id="signinconpwd" name="signinconpwd" required>
+        </div>
+    
+        <button type="button" class="btn btn-success" onclick="match()" style="font-size: 1.5rem; font-weight: bold;">Submit</button>
+    </form>
+</div>
+
+<script src="/static/js/signin.js"></script>
+{% endblock %}

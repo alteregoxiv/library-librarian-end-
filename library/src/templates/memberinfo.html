@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+<div class="container-md">
+    <form action="/membersinfo">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Member ID" id="memberid" name="memberid">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<center><h1 style="color: white; font-weight: bold;">Members</h1></center>
+<div class="container-sm memberinfobody">
+    {% if not data|length==0 %}
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                  <th scope="col">Member_ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Total_Transactions</th>
+                  <th scope="col">Current_Borrows</th>
+                  <th scope="col">Paid</th>
+                  <th scope="col">Debt</th>
+                  <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                    <tr>
+                        <th scope="row">{{ i.id }}</th>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.total_transactions }}</td>
+                        <td>{{ i.count }}</td>
+                        <td>{{ i.paid }}</td>
+                        <td>{{ i.debt }}</td>
+                        <td>
+                            <form action="/membersinfo" method="post">
+                                <input type="hidden" name="member_id" value="{{ i.id }}">
+                                <button type="submit" class="btn btn-danger" style="font-weight: bold;">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

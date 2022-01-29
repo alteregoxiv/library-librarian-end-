@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+<div class="container-md">
+    <form action="/alltransactions">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Transaction ID" id="transactionid" name="transactionid">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<center><h1 style="color: white; font-weight: bold;">Transactions</h1></center>
+<div class="container-sm transactionbody">
+    {% if not data|length==0 %}
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                  <th scope="col">Transaction_ID</th>
+                  <th scope="col">Book_ID</th>
+                  <th scope="col">Member_ID</th>
+                  <th scope="col">Librarian_ID</th>
+                  <th scope="col">Rent</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                    <tr>
+                        <th scope="row">{{ i.id }}</th>
+                        <td>{{ i.book_id }}</td>
+                        <td>{{ i.member_id }}</td>
+                        <td>{{ i.librarian_id }}</td>
+                        <td>{{ i.rent }}</td>
+                        <td>
+                            <form action="/alltransactions" method="post">
+                                <input type="hidden" name="transaction_id" value="{{ i.id }}">
+                                <button type="submit" class="btn btn-warning" style="font-weight: bold;">Return</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

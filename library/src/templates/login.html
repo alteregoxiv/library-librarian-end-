@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+<div class="container-sm loginbody">
+    <form action="/login" , method="post">
+        <div class="form-group">
+            <label for="loginemail"><h2 style="color: white; font-weight: bold;">Email address</h2></label>
+            <input type="email" class="form-control" id="loginemail" name="loginemail" placeholder="abc@xyz.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="loginpwd"><h2 style="color: white; font-weight: bold;">Password</h2></label>
+            <input type="password" class="form-control" id="loginpwd" name="loginpwd" required>
+        </div>
+
+        <button type="submit" class="btn btn-success" style="font-size: 1.5rem; font-weight: bold;">Submit</button>
+    </form>
+</div>
+{% endblock %}

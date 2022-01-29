@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+<div class="container-sm issuebody">
+    <form action="/issue" method="post">
+        <div class="form-group">
+            <label for="issuememberid"><h2 style="color: white; font-weight: bold;">Member ID</h2></label>
+            <input class="form-control" id="issuememberid" name="memberid" required>
+        </div>
+
+        <div class="form-group">
+            <label for="issuerent"><h2 style="color: white; font-weight: bold;">Rent</h2></label>
+            <input class="form-control" id="issuerent" name="rent" required>
+        </div>
+
+        <input id="issuelibrarianid" name="librarianid" type="hidden" , value="{{ session['id'] }}">
+        <input id="issuelibrarianid" name="bookid" type="hidden" , value="{{ bookid }}">
+    
+        <button type="submit" class="btn btn-success" style="font-size: 1.5rem; font-weight: bold;">Submit</button>
+    </form>
+</div>
+{% endblock %}

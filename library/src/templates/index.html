@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+<div class="container-sm indexbody">
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>
+                    {% if not maxpayer|length==0 %}
+                        <h4 style="color: white; font-weight: bold;">Max Payer : {{ maxpayer[0][1] }}({{ maxpayer[0][0] }})</h4>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row">2</th>
+                <td>
+                    {% if not maxbook|length==0 %}
+                        <h4 style="color: white; font-weight: bold;">Most Occurances of a book : {{ maxbook[0][0] }}({{ maxbook[0][1] }})</h4> 
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row">3</th>
+                <td>
+                    {% if leastbook > 0 %}
+                        <h4 style="color: white; font-weight: bold;">Please Add at least {{ leastbook }} more book(s)</h4>
+                    {% else %}
+                        <h4 style="color: white; font-weight: bold;">Requirred number books added<h4>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
