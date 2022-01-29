@@ -5,6 +5,12 @@ from werkzeug.security import generate_password_hash , check_password_hash
 from .models import db , librarian , transactions , members , books 
 from . import app
 
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html")
+
+
 @app.route('/')
 def index():
     a = members.query.all()
