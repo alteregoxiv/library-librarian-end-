@@ -33,7 +33,19 @@ def index():
     if c<15:
         c = 15 - c
 
-    return render_template("index.html" , maxpayer=[l[-1]] , maxbook=[q[-1]] , leastbook=c)
+    maxall = []
+    if len(l)>0:
+        maxall += [l[-1]]
+    else:
+        maxall += [[]]
+
+    if len(q)>0:
+        maxall += [q[-1]]
+    else:
+        maxall += [[]]
+    maxall += [c]
+
+    return render_template("index.html" , maxall=maxall)
 
 @app.route('/new_books' , methods=['GET' , 'POST'])
 def new_books():
