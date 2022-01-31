@@ -69,7 +69,7 @@ def new_books():
         db.session.add(a)
         db.session.commit()
 
-        msg = title + "was successfully added to the library"
+        msg = title + " was successfully added to the library"
         flash(msg , "success")
         return redirect(request.referrer)
 
@@ -304,7 +304,7 @@ def login():
             session['email'] = email
             session['name'] = a.name
             session['id'] = a.id
-            msg = "Successfully Signed in as" + email
+            msg = "Successfully Signed in as " + email
             flash(msg , "success")
             return redirect("/")
         else:

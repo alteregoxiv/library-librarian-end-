@@ -1,11 +1,20 @@
 from enum import unique
 from . import app
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.engine import Engine
+from sqlalchemy import event
 import sqlite3
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'
 
 db = SQLAlchemy(app)
+
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
+
 
 class books(db.Model):
     id = db.Column('book_id' , db.Integer , primary_key=True)
