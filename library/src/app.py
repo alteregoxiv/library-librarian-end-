@@ -184,30 +184,29 @@ def filterlibrary():
         l = []
         if not title=="":
             title = "%" + title + "%"
-            l += [books.title.like(title)]
+        else:
+            title = "%%"
+        l += [books.title.like(title)]
 
         if not author=="":
             author = "%" + author + "%"
-            l += [books.author.like(author)]
+        else:
+            author = "%%"
+        l += [books.author.like(author)]
 
         if not isbn=="":
             isbn = "%" + isbn + "%"
-            l += [books.isbn.like(isbn)]
+        else:
+            isbn = "%%"
+        l += [books.isbn.like(isbn)]
 
         if not publisher=="":
             publisher = "%" + publisher + "%"
-            l += [books.publisher.like(publisher)]
+        else:
+            publisher = "%%"
+        l += [books.publisher.like(publisher)]
         
-        if len(l)==0:
-            return render_template("filterlibrary.html" , data=[])
-        elif len(l)==1:
-            data = books.query.filter(l[0]).all()
-        elif len(l)==2:
-            data = books.query.filter(l[0] , l[1]).all()
-        elif len(l)==3:
-            data = books.query.filter(l[0] , l[1] , l[2]).all()
-        elif len(l)==4:
-            data = books.query.filter(l[0] , l[1] , l[2] , l[3]).all()
+        data = books.query.filter(l[0] , l[1] , l[2] , l[3]).all()
     
         return render_template("filterlibrary.html" , data=data , issued=issued)
     else:
