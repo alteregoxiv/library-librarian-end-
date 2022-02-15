@@ -1,50 +1,40 @@
-body{
-
-    background-color: #161b22;
-
+body {
+  background-color: #161b22;
 }
 
-.loginbody , .signinbody , .creatememberbody , .issuebody{
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+.loginbody,
+.signinbody,
+.creatememberbody,
+.issuebody {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.librarianinfobody , .indexbody{
-    
-    margin-top: 10vh;
-
+.librarianinfobody,
+.indexbody {
+  margin-top: 10vh;
 }
 
-.flashes{
-
-    margin-top: 1vh;
-
+.flashes {
+  margin-top: 1vh;
 }
 
-.new_books_body{
-
-    height: 80vh;
-    overflow: scroll;
-    margin-top: 5vh;
-
-
+.new_books_body {
+  height: 80vh;
+  overflow: scroll;
+  margin-top: 5vh;
 }
 
-.librarybody , .filterlibrarybody{
-
-    height: 75vh;
-    overflow: scroll;
-    margin-top: 5vh;
-
+.librarybody,
+.filterlibrarybody {
+  height: 75vh;
+  overflow: scroll;
+  margin-top: 5vh;
 }
 
-.errorimage{
-
-    display: flex;
-    margin: auto;
-
+.errorimage {
+  display: flex;
+  margin: auto;
 }
