@@ -1,66 +1,64 @@
-{% extends "base.html" %}
-
-{% block mainbody %}
+{% extends "base.html" %} {% block mainbody %}
 <div class="container-md">
-    <form action="/filterlibrary">
-        <div class="row">
-            <div class="col"><input class="form-control mr-sm-2" name="title" placeholder="Title"></div>
-            <div class="col"><input class="form-control mr-sm-2" name="author" placeholder="Author"></div>
-            <div class="col"><input class="form-control mr-sm-2" name="isbn" placeholder="ISBN"></div>
-            <div class="col"><input class="form-control mr-sm-2" name="publisher" placeholder="Publisher"></div>
-            <div class="col"><button type="submit" class="btn btn-success" style="font-weight: bold;">Search</button></div>
-        </div>
-    </form>
+  <form action="/filterlibrary">
+    <div class="row">
+      <div class="col"><input class="form-control mr-sm-2" name="title" placeholder="Title" /></div>
+      <div class="col"><input class="form-control mr-sm-2" name="author" placeholder="Author" /></div>
+      <div class="col"><input class="form-control mr-sm-2" name="isbn" placeholder="ISBN" /></div>
+      <div class="col"><input class="form-control mr-sm-2" name="publisher" placeholder="Publisher" /></div>
+      <div class="col"><button type="submit" class="btn btn-success" style="font-weight: bold">Search</button></div>
+    </div>
+  </form>
 </div>
 
 <div class="container-sm filterlibrarybody">
-    {% if not data|length==0 %}
-        <table class="table table-hover table-dark">
-            <thead>
-                <tr>
-                  <th scope="col">Book_ID</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Author</th>
-                  <th scope="col">Publisher</th>
-                  <th scope="col">Issue</th>
-                  <th scope="col">Remove</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in data %}
-                    <tr>
-                        <th scope="row">{{ i.id }}</th>
-                        <td>{{ i.title }}</td>
-                        <td>{{ i.author }}</td>
-                        <td>{{ i.publisher }}</td>
-                        <td>
-                            {% if i.id in issued %}
-                                <h5 style="color: white; font-weight: bold;">Already Issued</h5>
-                            {% else %}
-                                <form action="/issue">
-                                    <input type="hidden" name="bookid" value="{{ i.id }}">
-                                    <input type="hidden" name="title" value="{{ i.title }}">
-                                    <input type="hidden" name="authors" value="{{ i.author }}">
-                                    <input type="hidden" name="isbn" value="{{ i.isbn }}">
-                                    <input type="hidden" name="publisher" value="{{ i.publisher }}">
-                                    <button type="submit" class="btn btn-success" style="font-weight: bold;">Issue</button>
-                                </form>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if i.id in issued %}
-                                <h5 style="color: white; font-weight: bold;">Ask to Return First</h5>
-                            {% else %}
-                                <form action="/removebook" method="post">
-                                    <input type="hidden" name="book_id" value="{{ i.id }}">
-                                    <button type="submit" class="btn btn-danger" style="font-weight: bold;">Remove</button>
-                                </form>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
+  {% if not data|length==0 %}
+  <table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Book_ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Publisher</th>
+        <th scope="col">Issue</th>
+        <th scope="col">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in data %}
+      <tr>
+        <th scope="row">{{ i.id }}</th>
+        <td>{{ i.title }}</td>
+        <td>{{ i.author }}</td>
+        <td>{{ i.publisher }}</td>
+        <td>
+          {% if i.id in issued %}
+          <h5 style="color: white; font-weight: bold">Already Issued</h5>
+          {% else %}
+          <form action="/issue">
+            <input type="hidden" name="bookid" value="{{ i.id }}" />
+            <input type="hidden" name="title" value="{{ i.title }}" />
+            <input type="hidden" name="authors" value="{{ i.author }}" />
+            <input type="hidden" name="isbn" value="{{ i.isbn }}" />
+            <input type="hidden" name="publisher" value="{{ i.publisher }}" />
+            <button type="submit" class="btn btn-success" style="font-weight: bold">Issue</button>
+          </form>
+          {% endif %}
+        </td>
+        <td>
+          {% if i.id in issued %}
+          <h5 style="color: white; font-weight: bold">Ask to Return First</h5>
+          {% else %}
+          <form action="/removebook" method="post">
+            <input type="hidden" name="book_id" value="{{ i.id }}" />
+            <button type="submit" class="btn btn-danger" style="font-weight: bold">Remove</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
 </div>
 {% endblock %}

@@ -1,48 +1,46 @@
-{% extends "base.html" %}
-
-{% block mainbody %}
+{% extends "base.html" %} {% block mainbody %}
 <div class="container-md">
-    <form action="/filtersearch">
-        <div class="row">
-            <div class="col"><input class="form-control mr-sm-2" name="title" placeholder="Title"></div>
-            <div class="col"><input class="form-control mr-sm-2" name="author" placeholder="Author"></div>
-            <div class="col"><input class="form-control mr-sm-2" name="isbn" placeholder="ISBN"></div>
-            <div class="col"><input class="form-control mr-sm-2" name="publisher" placeholder="Publisher"></div>
-            <div class="col"><button type="submit" class="btn btn-success" style="font-weight: bold;">Search</button></div>
-        </div>
-    </form>
+  <form action="/filtersearch">
+    <div class="row">
+      <div class="col"><input class="form-control mr-sm-2" name="title" placeholder="Title" /></div>
+      <div class="col"><input class="form-control mr-sm-2" name="author" placeholder="Author" /></div>
+      <div class="col"><input class="form-control mr-sm-2" name="isbn" placeholder="ISBN" /></div>
+      <div class="col"><input class="form-control mr-sm-2" name="publisher" placeholder="Publisher" /></div>
+      <div class="col"><button type="submit" class="btn btn-success" style="font-weight: bold">Search</button></div>
+    </div>
+  </form>
 </div>
 
 <div class="container-sm filterlibrarybody">
-    <table class="table table-hover table-dark">
-        <thead>
-            <tr>
-              <th scope="col">Book_ID</th>
-              <th scope="col">Title</th>
-              <th scope="col">Author</th>
-              <th scope="col">Publisher</th>
-              <th scope="col">ADD</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in data %}
-                <tr>
-                    <th scope="row">{{ i["bookID"] }}</th>
-                    <td>{{ i["title"] }}</td>
-                    <td>{{ i["authors"] }}</td>
-                    <td>{{ i["publisher"] }}</td>
-                    <td>
-                        <form action="/new_books" method="post">
-                            <input type="hidden" name="title" value="{{ i['title'] }}">
-                            <input type="hidden" name="authors" value="{{ i['authors'] }}">
-                            <input type="hidden" name="isbn" value="{{ i['isbn'] }}">
-                            <input type="hidden" name="publisher" value="{{ i['publisher'] }}">
-                            <button type="submit" class="btn btn-success" style="font-weight: bold;">ADD</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+  <table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Book_ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Publisher</th>
+        <th scope="col">ADD</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in data %}
+      <tr>
+        <th scope="row">{{ i["bookID"] }}</th>
+        <td>{{ i["title"] }}</td>
+        <td>{{ i["authors"] }}</td>
+        <td>{{ i["publisher"] }}</td>
+        <td>
+          <form action="/new_books" method="post">
+            <input type="hidden" name="title" value="{{ i['title'] }}" />
+            <input type="hidden" name="authors" value="{{ i['authors'] }}" />
+            <input type="hidden" name="isbn" value="{{ i['isbn'] }}" />
+            <input type="hidden" name="publisher" value="{{ i['publisher'] }}" />
+            <button type="submit" class="btn btn-success" style="font-weight: bold">ADD</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}
