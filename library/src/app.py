@@ -6,6 +6,11 @@ from .models import db , librarian , transactions , members , books
 from . import app
 
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html")
