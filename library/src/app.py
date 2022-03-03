@@ -95,6 +95,9 @@ def removebook():
 
 @app.route('/membersinfo' , methods=['GET' , 'POST'])
 def membersinfo():
+    if "email" not in session:
+        flash("Please login first" , "warning")
+        return redirect("/login")
     if request.method=="GET":
         if request.args:
             a = members.query.get(request.args.get("memberid"))
@@ -114,6 +117,9 @@ def membersinfo():
 
 @app.route('/createmember' , methods=["GET" , "POST"])
 def createmember():
+    if "email" not in session:
+        flash("Please login first" , "warning")
+        return redirect("/login")
     if request.method=="GET":
         return render_template("createmember.html")
     else:
@@ -130,13 +136,20 @@ def createmember():
 
 @app.route('/librarianinfo')
 def librarianinfo():
-    a = librarian.query.get(session['id'])
-    return render_template("librarianinfo.html" , data=a)
+    if "email" not in session:
+        flash("Please login first" , "warning")
+        return redirect("/login")
+    else:
+        a = librarian.query.get(session['id'])
+        return render_template("librarianinfo.html" , data=a)
 
 
 
 @app.route('/alltransactions' , methods=['GET' , 'POST'])
 def alltransactions():
+    if "email" not in session:
+        flash("Please login first" , "warning")
+        return redirect("/login")
     if request.method=="GET":
         if request.args:
             a = transactions.query.filter(transactions.id==request.args.get("transactionid")).first()
@@ -166,19 +179,26 @@ def alltransactions():
 
 @app.route("/library")
 def library():
-    a = books.query.all()
-    b = transactions.query.all()
-    issued = []
-    for i in b:
-        issued += [i.book_id]
-    
-    if len(a)==0:
-        return render_template("library.html" , data=[])
+    if "email" not in session:
+        flash("Please login first" , "warning")
+        return redirect("/login")
     else:
-        return render_template("library.html" , data=a , issued=issued)
+        a = books.query.all()
+        b = transactions.query.all()
+        issued = []
+        for i in b:
+            issued += [i.book_id]
+        
+        if len(a)==0:
+            return render_template("library.html" , data=[])
+        else:
+            return render_template("library.html" , data=a , issued=issued)
 
 @app.route("/filterlibrary")
 def filterlibrary():
+    if "email" not in session:
+        flash("Please login first" , "warning")
+        return redirect("/login")
     if len(request.args)>0:
         title = request.args.get('title')
         author = request.args.get("author") 
@@ -262,6 +282,9 @@ def filtersearch():
 
 @app.route("/issue" , methods=['GET' , 'POST'])
 def issue():
+    if "email" not in session:
+        flash("Please login first" , "warning")
+        return redirect("/login")
     if request.method=='GET':
         return render_template("issue.html" , bookid=request.args.get("bookid"))
     else:
