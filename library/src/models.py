@@ -13,8 +13,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://' + USER + ':' + PASS + '@
 db = SQLAlchemy(app)
 
 
-
-
 class books(db.Model):
     id = db.Column('book_id' , db.Integer , primary_key=True)
     title = db.Column(db.String(100) , nullable=False)

@@ -18,39 +18,43 @@ def not_found(e):
 
 @app.route('/')
 def index():
-    a = members.query.all()
-    b = books.query.all()
-
-    l = []
-    for i in a:
-        l += [(i.paid , i.name)]
-    l = sorted(l , key=lambda i:i[0])
+    if "email" not in session:
+        maxall = []
+        return render_template("index.html" , maxall=maxall)
+    else:
+        a = members.query.all()
+        b = books.query.all()
     
-    c = 0
-    d = {}  
-    for i in b:
-        c += 1
-        if i.title not in d:
-            d[i.title] = 1
+        l = []
+        for i in a:
+            l += [(i.paid , i.name)]
+        l = sorted(l , key=lambda i:i[0])
+        
+        c = 0
+        d = {}  
+        for i in b:
+            c += 1
+            if i.title not in d:
+                d[i.title] = 1
+            else:
+                d[i.title] += 1
+        q = sorted(d.items() , key=lambda i:i[1])
+        if c<15:
+            c = 15 - c
+    
+        maxall = []
+        if len(l)>0:
+            maxall += [l[-1]]
         else:
-            d[i.title] += 1
-    q = sorted(d.items() , key=lambda i:i[1])
-    if c<15:
-        c = 15 - c
-
-    maxall = []
-    if len(l)>0:
-        maxall += [l[-1]]
-    else:
-        maxall += [[]]
-
-    if len(q)>0:
-        maxall += [q[-1]]
-    else:
-        maxall += [[]]
-    maxall += [c]
-
-    return render_template("index.html" , maxall=maxall)
+            maxall += [[]]
+    
+        if len(q)>0:
+            maxall += [q[-1]]
+        else:
+            maxall += [[]]
+        maxall += [c]
+    
+        return render_template("index.html" , maxall=maxall)
 
 @app.route('/new_books' , methods=['GET' , 'POST'])
 def new_books():
@@ -219,6 +223,9 @@ def filterlibrary():
 
 @app.route("/filtersearch")
 def filtersearch():
+    if "email" not in session:
+        flash("Please login first" , "warning")
+        return redirect("/login")
     if len(request.args)>0:
         title = request.args.get('title')
         author = request.args.get("author") 
