@@ -205,6 +205,7 @@ def filterlibrary():
         isbn = request.args.get("isbn")
         publisher = request.args.get("publisher")
 
+
         a = transactions.query.all()
         issued = []
         for i in a:
@@ -215,25 +216,25 @@ def filterlibrary():
             title = "%" + title + "%"
         else:
             title = "%%"
-        l += [books.title.like(title)]
+        l += [books.title.ilike(title)]
 
         if not author=="":
             author = "%" + author + "%"
         else:
             author = "%%"
-        l += [books.author.like(author)]
+        l += [books.author.ilike(author)]
 
         if not isbn=="":
             isbn = "%" + isbn + "%"
         else:
             isbn = "%%"
-        l += [books.isbn.like(isbn)]
+        l += [books.isbn.ilike(isbn)]
 
         if not publisher=="":
             publisher = "%" + publisher + "%"
         else:
             publisher = "%%"
-        l += [books.publisher.like(publisher)]
+        l += [books.publisher.ilike(publisher)]
         
         data = books.query.filter(l[0] , l[1] , l[2] , l[3]).all()
     
